@@ -12,7 +12,33 @@
 <div class="example-wrapper">
  <h2>Cette page affichera le descriptif du stage ayant l'identifiant {{ valeur_id }}</h2>
 
- <h3>Titre - Nom - Activité - Adresse - Description -  Formation - Email contact</h3>
+ <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Numéro</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Activité</th>
+      <th scope="col">Adresse</th>
+       <th scope="col">Description</th>
+      <th scope="col">Formation</th>
+       <th scope="col">Email contact</th>
+       <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Développement web</td>
+      <td>57 Rue de Mirambeau</td>
+      <td>Un super stage avec des gens sympas</td>
+      <td> Licence Pro</td>
+      <td>contatc@gmail.com</td>
+    
+    </tr>
+    </body>
+    
+    </tr>
+  </thead>
+</table>
+
 
  </div>
 {% endblock %}
