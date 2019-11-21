@@ -8,6 +8,54 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class="example-wrapper">
- <h2>Cette page affichera la liste des formations de l'IUT</h2>
+ <h2>Liste par formations l'IUT</h2>
  </div>
+
+ <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Formation</th>
+        <th scope="col">Entreprise</th>
+        <th scope="col">Stage proposé</th>
+        <th scope="col">Activité</th>
+        <th scope="col">Adresse</th>
+         <th scope="col">Description</th>
+         <th scope="col">Email contact</th>
+         <th scope="col">Détails</th>
+      </thead>
+         <tbody>
+            <tr>
+              <td>DU TIC</td>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td> 
+              <td>...</td>             
+              <td> <a href = "{{ path('pro_stage_id', {'id': 1}) }}"> Détails</a></td>
+            </tr>
+            <tr>
+              <td>DUT Informatique</td>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td> 
+              <td>...</td> 
+              <td><a href = "{{ path('pro_stage_id', {'id': 2}) }}"> Détails</a></td>
+            </tr>
+
+            <tr>
+                <td>Licence Professionnelle Multimédia</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td> 
+                <td>...</td>
+                <td>...</td> 
+                <td><a href = "{{ path('pro_stage_id', {'id': 3}) }}"> Détails</a></td>
+              </tr>
+
+            </tbody>
+      </table>
 {% endblock %}
