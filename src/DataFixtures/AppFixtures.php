@@ -10,13 +10,24 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-         $entrepriseArobiz = new Entreprise();
-         $entrepriseArobiz->setNom("Arobiz");
-         $entrepriseArobiz->setActivité("Développement web");
-         $entrepriseArobiz->setAdresse("100 Avenue de l'Adour");
-         $entrepriseArobiz->setSiteWeb("www.arobiz.com");
-
-        $manager->persist($entrepriseArobiz);
+        // Création d'un générateur de données faker
+        $faker = \Faker\Factory::create('fr_FR'); 
+        
+        $nbEntreprises=30;
+        
+        for($i=1; $i<= $nbEntreprises; $i++)
+        {
+            $nomEntr=$faker->company;
+            $entreprise = new Entreprise();
+            $entreprise->setNom($nomEntr);
+            $entreprise->setActivité($faker->realText($maxNbChars = 20, $indexSize = 2));
+            $entreprise->setAdresse($faker->streetAddress);
+            $entreprise->setSiteWeb("www.$nomEntr.com");
+   
+           $manager->persist($entreprise);
+        }
+        
+       
 
         $manager->flush();
     }
