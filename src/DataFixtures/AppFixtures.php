@@ -28,42 +28,31 @@ class AppFixtures extends Fixture
             $entreprise->setAdresse($faker->streetAddress);
             $entreprise->setSiteWeb("www.$nomEntr.com");
 
-/*
-            // Stages proposés par l'entreprise
-            $nbStagesProposes= $faker->numberBetween($min = 0, $max = 10);
-            for($i=0; $i <= $nbStagesProposes; $i++)
-            {
-                $stage=new Stage();
-                $stage->setTitre($faker->realText($maxNbChars = 20, $indexSize = 2));
-                $stage->setDescription($faker->realText($maxNbChars = 20, $indexSize = 2));
-                $stage->setEmailContact($faker->companyEmail);
-                $entreprise->addStage($stage);
-                $stage->setEntreprise($entreprise);
-            }
- */           
-   
-           $manager->persist($entreprise);
-           
-           
+            $tableauEntreprises[$i]=$entreprise;
+          
+        }
 
+        foreach($tableauEntreprises as $entreprise)
+        {
+         $manager->persist($entreprise);
         }
         
         // Création des formations
         
         $DUTInfo = new Formation();
-        $DUTInfo -> setNomLong("Diplôme Universitaire Technologique Informatique");
-        $DUTInfo -> setNomCourt("DUT Info");
+        $DUTInfo->setNomLong("Diplôme Universitaire Technologique Informatique");
+        $DUTInfo->setNomCourt("DUT Info");
 
         $LicenceP = new Formation();
-        $LicenceP-> setNomLong("Licence Professionnelle Multimédia");
-        $LicenceP -> setNomCourt("LP Multimédia");
+        $LicenceP->setNomLong("Licence Professionnelle Multimédia");
+        $LicenceP->setNomCourt("LP Multimédia");
 
         $DUTic = new Formation();
-        $DUTic-> setNomLong("Diplôme Universitaire en Technologie de l'Information et de la Communication");
-        $DUTic -> setNomCourt("DU TIC");
+        $DUTic->setNomLong("Diplôme Universitaire en Technologie de l'Information et de la Communication");
+        $DUTic->setNomCourt("DU TIC");
 
-        /* On regroupe les objets "Formation" dans un tableau
-        pour pouvoir s'y référer au moment de la création d'un stage */
+        // On regroupe les objets "Formation" dans un tableau
+       
         $tableauFormations = array($DUTInfo,$LicenceP,$DUTic);
 
          // Pour chaque formation
@@ -79,15 +68,15 @@ class AppFixtures extends Fixture
                 $stage->addFormation($formation);
 
               
-                // Sélectionner un type de ressource au hasard parmi les 8 types enregistrés dans $tableauTypesRessources
-                $numTypeRessource = $faker->numberBetween($min = 0, $max = 7);
-                // Création relation Ressource --> TypeRessource
-                $ressource -> setTypeRessource($tableauTypesRessources[$numTypeRessource]);
-                // Création relation TypeRessource --> Ressource
-                $tableauTypesRessources[$numTypeRessource] -> addRessource($ressource);
+                // Sélectionner une Entreprise au hasard 
+                $numEntreprise = $faker->numberBetween($min = 0, $max = 30);
+                // Création relation Stage --> Entreprise
+                $stage->setEntreprise($tableauEntreprises[$numEntreprise]);
+                // Création relation Entreprise --> Stage
+                $tableauEntreprises[$numEntreprise] -> addStage($stage);
                 // Persister les objets modifiés
-                $manager->persist($ressource);
-                $manager->persist($tableauTypesRessources[$numTypeRessource]);
+                $manager->persist($stage);
+                $manager->persist($tableauEntreprises[$numEntreprise]);
             }
 
             $manager->persist($formation);
