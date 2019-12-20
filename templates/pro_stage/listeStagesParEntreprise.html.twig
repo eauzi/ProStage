@@ -1,5 +1,4 @@
- 
- {% extends 'monTemplate.html.twig' %}
+{% extends 'monTemplate.html.twig' %}
 
 
 {% block title %}Prostage - Entreprises{% endblock %}
@@ -10,26 +9,25 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class="example-wrapper">
- <h2>Liste des entreprises proposant un stage</h2>
+ <h2>Liste des stages de {{entreprise.nom }} </h2>
  </div>
 
  <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Entreprise</th>
+        <th scope="col">Stage</th>
          <th scope="col">Détails</th>
         </thead>
         <tbody>
            
-           {% for entrepriseCourante in entreprises %}
+           {% for stageCourant in stages %}
            
            <tr>
-        
-             <td> {{entrepriseCourante.nom}} </td>            
-             <td> <a href = "{{ path('pro_stage_entreprise_id', {'id': entrepriseCourante.id}) }}"> Liste de stages</a></td>
+             <td> {{stageCourant.titre}} </td>            
+             <td> <a href = "{{ path('pro_stage_id', {'id': stageCourant.id}) }}"> Détails</a></td>
            </tr>
 
-           {% endfor%}
+           {% endfor %}
 
            </tbody>
       </table>

@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Stage;
+use App\Entity\Entreprise;
+use App\Entity\Formation;
 
 class ProStageController extends AbstractController
 {
@@ -12,8 +15,14 @@ class ProStageController extends AbstractController
      */
     public function index()
     {
+
+        $repositoryStage=$this->getDoctrine()->getRepository(Stage::class);
+
+        $stages=$repositoryStage->findAll();
+
+
         return $this->render('pro_stage/index.html.twig', [
-            'controller_name' => 'ProStageController',
+            'controller_name' => 'ProStageController', "stages"=> $stages,
         ]);
     }
 	
@@ -23,8 +32,14 @@ class ProStageController extends AbstractController
      */
     public function afficheEntreprise()
     {
+        
+        $repositoryEntreprise=$this->getDoctrine()->getRepository(Entreprise::class);
+        $entreprises=$repositoryEntreprise->findAll();
+
+        
+       
         return $this->render('pro_stage/Entreprises.html.twig', [
-            'controller_name' => 'ProStageController',
+            'controller_name' => 'ProStageController', "entreprises" => $entreprises,
         ]);
     }
 
@@ -33,8 +48,12 @@ class ProStageController extends AbstractController
      */
     public function afficheFormation()
     {
+        
+        $repositoryFormations=$this->getDoctrine()->getRepository(Formation::class);
+        $formations=$repositoryFormations->findAll();
+
         return $this->render('pro_stage/Formations.html.twig', [
-            'controller_name' => 'ProStageController',
+            'controller_name' => 'ProStageController', "formations" => $formations,
         ]);
     }
 
@@ -48,4 +67,24 @@ class ProStageController extends AbstractController
             'valeur_id' => $id,
         ]);
     }
+
+    /**
+     * @Route("/entreprises/{id}", name="pro_stage_entreprise_id")
+     */
+
+    public function listeStagesParEntreprise($id)
+    {
+        $repositoryEntreprise=$this->getDoctrine()->getRepository(Entreprise::class);
+        $entreprise=$repositoryEntreprise->find($id);
+
+        $repositoryStage=$this->getDoctrine()->getRepository(Stage::class);
+        $stages=$repositoryStage->findByEntreprise($id);
+        
+        
+        return $this->render('pro_stage/listeStagesParEntreprise.html.twig', [
+            'controller_name' => 'ProStageController',
+            "entreprise" => $entreprise, "stages" => $stages,
+        ]);
+    }
+   
 }

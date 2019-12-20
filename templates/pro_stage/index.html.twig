@@ -23,32 +23,20 @@
             <th scope="col">Numéro</th>
             <th scope="col">Stage</th>
             <th scope="col">Entreprise</th>
-            <th scope="col">Fomation</th>
             <th scope="col">Détails</th>
           </tr>
         </thead>
         <tbody>
+         
+         {% for stageCourant in stages %}
           <tr>
-            <th scope="row">1</th>
-            <td>Stage de développement web</td>
-            <td>Altanoveo</td>
-            <td>DUT Informatique</td>
-            <td> <a href = "{{ path('pro_stage_id', {'id': 1}) }}"> Détails</a></td>
+            <th scope="row"> {{loop.index}} </th>
+            <td> {{stageCourant.titre}} </td>
+            <td> {{stageCourant.entreprise.nom}} </td>
+            <td> <a href = "{{ path('pro_stage_id', {'id':stageCourant.id }) }}"> Détails</a></td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Stage de programmation orientée objet</td>
-            <td>Capgemini</td>
-            <td>Licence Pro</td>
-            <td><a href = "{{ path('pro_stage_id', {'id': 2}) }}"> Détails</a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Stage de bases de données</td>
-            <td>Le Crédit Agricole</td>
-            <td>DUT Informatique</td>
-            <td><a href = "{{ path('pro_stage_id', {'id': 3}) }}"> Détails</a></td>
-          </tr>
+         {% endfor%}
+ 
         </tbody>
       </table>
 

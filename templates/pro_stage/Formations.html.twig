@@ -18,19 +18,17 @@
          <th scope="col">Détails</th>
       </thead>
          <tbody>
-            <tr>
-              <td>DU TIC</td>            
-              <td> <a href = "{{ path('pro_stage_id', {'id': 1}) }}"> Détails</a></td>
+            
+          
+          {% for formationCourante in formations %}
+          <tr>
+              <td>{{formationCourante.nomCourt}}</td>            
+              <td> <a href = "{{ path('pro_stage_id', {'id': 1}) }}"> Liste des stages</a></td>
             </tr>
             <tr>
-              <td>DUT Informatique</td>
-              <td><a href = "{{ path('pro_stage_id', {'id': 2}) }}"> Détails</a></td>
-            </tr>
+           {% endfor%}
 
-            <tr>
-                <td>Licence Professionnelle Multimédia</td>
-                <td><a href = "{{ path('pro_stage_id', {'id': 3}) }}"> Détails</a></td>
-              </tr>
+    
 
             </tbody>
       </table>
