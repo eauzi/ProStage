@@ -23,7 +23,7 @@
           {% for formationCourante in formations %}
           <tr>
               <td>{{formationCourante.nomCourt}}</td>            
-              <td> <a href = "{{ path('pro_stage_id', {'id': 1}) }}"> Liste des stages</a></td>
+              <td> <a href = "{{ path('pro_stage_formation_id', {'id': formationCourante.id}) }}"> Liste des stages</a></td>
             </tr>
             <tr>
            {% endfor%}

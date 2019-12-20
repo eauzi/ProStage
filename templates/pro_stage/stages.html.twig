@@ -17,6 +17,7 @@
     <tr>
       <th scope="col">Numéro</th>
       <th scope="col">Nom</th>
+      <th scope="col">Entreprise</th>
       <th scope="col">Activité</th>
       <th scope="col">Adresse</th>
        <th scope="col">Description</th>
@@ -25,12 +26,13 @@
        <tbody>
     <tr>
       <th scope="row">{{ valeur_id }}</th>
-      <td>Détails...</td>
-      <td>Détails...</td>
-      <td>Détails...</td>
-      <td>Détails...</td>
-      <td>Détails...</td>
-      <td>Détails...</td>
+      <td> {{stage.titre}} </td>
+      <td> {{stage.entreprise.nom}} </td>
+      <td> {{stage.entreprise.activité}} </td>
+      <td> {{stage.entreprise.adresse}} </td>
+      <td> {{stage.description}} </td>
+      <td></td>
+      <td> {{stage.emailContact}}</td>
     
     </tr>
     </body>
