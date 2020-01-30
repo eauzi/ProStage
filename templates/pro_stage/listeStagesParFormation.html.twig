@@ -10,7 +10,14 @@
 </style>
 <div class="example-wrapper">
  
- <h2> Liste des stages de {{formations.nomLong }} </h2>
+  {% if stages is not empty %}
+ <h2> Liste des stages de {{stages[0].Formation[0].nomCourt }} </h2>
+
+ {% else %}
+  <h2> Cette formation ne propose pas de stages </h2>
+
+  {% endif %}
+
  </div>
 
  <table class="table">

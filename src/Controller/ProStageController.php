@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Stage;
 use App\Entity\Entreprise;
 use App\Entity\Formation;
+use App\Repository\StageRepository;
 
 class ProStageController extends AbstractController
 {
@@ -73,40 +74,32 @@ class ProStageController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/{id}", name="pro_stage_entreprise_id")
+     * @Route("/entreprises/{nomEntreprise}", name="pro_stage_entreprise_id")
      */
 
-    public function listeStagesParEntreprise($id)
+    public function listeStagesParEntreprise(StageRepository $repositoryStage, $nomEntreprise)
     {
-        $repositoryEntreprise=$this->getDoctrine()->getRepository(Entreprise::class);
-        $entreprise=$repositoryEntreprise->find($id);
-
-        $repositoryStage=$this->getDoctrine()->getRepository(Stage::class);
-        $stages=$repositoryStage->findByEntreprise($id);
+        $stages=$repositoryStage->findStagePourUneEntreprise($nomEntreprise);
         
         
         return $this->render('pro_stage/listeStagesParEntreprise.html.twig', [
             'controller_name' => 'ProStageController',
-            "entreprise" => $entreprise, "stages" => $stages,
+             "stages" => $stages,
         ]);
     }
 
     /**
-     * @Route("/formations/{id}", name="pro_stage_formation_id")
+     * @Route("/formations/{nomFormation}", name="pro_stage_formation_id")
      */
 
-    public function listeStagesParFormation($id)
+    public function listeStagesParFormation(StageRepository $repositoryStage, $nomFormation)
     {
-        $repositoryFormation=$this->getDoctrine()->getRepository(Formation::class);
-        $formations=$repositoryFormation->find($id);
-
-        $repositoryStage=$this->getDoctrine()->getRepository(Stage::class);
-        $stages=$repositoryStage->findBy(["id" => $id]);
+        $stages=$repositoryStage->findStagePourUneFormation($nomFormation);
         
         
         return $this->render('pro_stage/listeStagesParFormation.html.twig', [
             'controller_name' => 'ProStageController',
-            "formations" => $formations, "stages" => $stages,
+            "stages" => $stages,
         ]);
     }
    

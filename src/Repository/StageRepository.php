@@ -6,6 +6,7 @@ use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
+
 /**
  * @method Stage|null find($id, $lockMode = null, $lockVersion = null)
  * @method Stage|null findOneBy(array $criteria, array $orderBy = null)
@@ -18,6 +19,48 @@ class StageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Stage::class);
     }
+
+     /**
+      * @return Stage[] Returns an array of Stage objects
+      */
+    
+    public function findStagePourUneEntreprise($nomEntreprise)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.entreprise','e')
+            ->where('e.nom = :nomE')
+            ->setParameter('nomE', $nomEntreprise)
+            ->orderBy('s.titre', 'ASC') 
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+      * @return Stage[] Returns an array of Stage objects
+      */
+    
+      public function findStagePourUneFormation($nomFormation)
+      {
+        // Récupérer gestionnaire entité
+            $gestionnaireEntite=$this->getEntityManager();
+
+        // Construire requête
+        $requete=$gestionnaireEntite->createQuery(
+            'SELECT s
+            FROM App\Entity\Stage s
+            JOIN s.formation f
+            WHERE f.nomCourt = :formation'
+        );
+
+        // Definir valeur du paramètre
+        $requete->setParameter('formation', $nomFormation);
+
+        // Retourner résultats
+        return $requete->execute();
+
+      }
+    
 
     // /**
     //  * @return Stage[] Returns an array of Stage objects
