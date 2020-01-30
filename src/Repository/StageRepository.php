@@ -60,6 +60,27 @@ class StageRepository extends ServiceEntityRepository
         return $requete->execute();
 
       }
+
+      /**
+      * @return Stage[] Returns an array of Stage objects
+      */
+    
+      public function findStageEtEntrepriseAssociee()
+      {
+        // Récupérer gestionnaire entité
+            $gestionnaireEntite=$this->getEntityManager();
+
+        // Construire requête
+        $requete=$gestionnaireEntite->createQuery(
+            'SELECT s, e
+            FROM App\Entity\Stage s
+            JOIN s.entreprise e'      
+        );
+        
+        // Retourner résultats
+        return $requete->execute();
+
+      }
     
 
     // /**
