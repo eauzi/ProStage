@@ -65,12 +65,12 @@ class Entreprise
         return $this;
     }
 
-    public function getActivité(): ?string
+    public function getActivite(): ?string
     {
         return $this->activité;
     }
 
-    public function setActivité(string $activité): self
+    public function setActivite(string $activité): self
     {
         $this->activité = $activité;
 
