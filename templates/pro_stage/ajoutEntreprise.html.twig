@@ -3,6 +3,14 @@
  {% block title %} Prostage - Ajouter une entreprises {% endblock %}
 
  {% block contenu %}
+ 
  <h2> Ajout d'une entreprise </h2>
-{{form(vueFormulaireEntreprise)}}
+{{form_start(vueFormulaireEntreprise)}}
+
+{{ form_row(vueFormulaireEntreprise.Nom)}}
+{{ form_row(vueFormulaireEntreprise.Activite)}}
+{{ form_row(vueFormulaireEntreprise.Adresse)}}
+{{ form_row(vueFormulaireEntreprise.SiteWeb)}}
+<button type="submit" class="btn btn-dark">Valider</button>
+{{form_end(vueFormulaireEntreprise)}}
 {% endblock %}

@@ -8,6 +8,8 @@ use App\Entity\Stage;
 use App\Entity\Entreprise;
 use App\Entity\Formation;
 use App\Repository\StageRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class ProStageController extends AbstractController
 {
@@ -43,7 +45,7 @@ class ProStageController extends AbstractController
     /**
      * @Route("/entreprises/ajouter", name="pro_stage_ajout_entreprise")
      */
-    public function ajouterEntreprise()
+    public function ajouterEntreprise(Request $request, ObjectManager $manager)
     {
         // Création d'une entrprise vierge
         $entreprise=new Entreprise();
@@ -56,6 +58,17 @@ class ProStageController extends AbstractController
         ->add('SiteWeb')
         ->getForm();
 
+        $formulaireEntreprise->handleRequest($request);
+
+        if ($formulaireEntreprise->isSubmitted())
+        {        
+           // Enregistrer la ressource en base de données
+           $manager->persist($entreprise);
+           $manager->flush();
+
+           // Rediriger l'utilisateur vers la page d'accueil
+           return $this->redirectToRoute('pro_stage_entreprise');
+        }
         
        
         return $this->render('pro_stage/ajoutEntreprise.html.twig', ['vueFormulaireEntreprise' => $formulaireEntreprise->createView()
