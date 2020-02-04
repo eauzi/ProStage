@@ -10,6 +10,7 @@ use App\Entity\Formation;
 use App\Repository\StageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\Form\EntrepriseType;
 
 class ProStageController extends AbstractController
 {
@@ -71,9 +72,44 @@ class ProStageController extends AbstractController
         }
         
        
-        return $this->render('pro_stage/ajoutEntreprise.html.twig', ['vueFormulaireEntreprise' => $formulaireEntreprise->createView()
+        return $this->render('pro_stage/ajoutModifEntreprise.html.twig', ['vueFormulaireEntreprise' => $formulaireEntreprise->createView(), 'action'=>"ajouter"
         ]);
     }
+
+
+
+    /**
+     * @Route("/entreprises/modifier/{id}", name="pro_stage_modifEntreprise")
+     */
+    public function modifierEntreprise(Request $request, ObjectManager $manager, Entreprise $entreprise)
+    {
+        // Création du formulaire permettant de modifier une ressource
+        $formulaireEntreprise = $this->createFormBuilder($entreprise)
+        ->add('Nom')
+        ->add('Activite')
+        ->add('Adresse')
+        ->add('SiteWeb')
+        ->getForm();
+
+        /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu
+        dans cette requête contient des variables titre, descriptif, etc. alors la méthode handleRequest()
+        récupère les valeurs de ces variables et les affecte à l'objet $ressource*/
+        $formulaireEntreprise->handleRequest($request);
+
+         if ($formulaireEntreprise->isSubmitted() )
+         {
+            // Enregistrer la ressource en base de donnéelse
+            $manager->persist($entreprise);
+            $manager->flush();
+
+            // Rediriger l'utilisateur vers la page d'accueil
+            return $this->redirectToRoute('pro_stage_entreprise');
+         }
+
+        // Afficher la page présentant le formulaire d'ajout d'une ressource
+        return $this->render('pro_stage/ajoutModifEntreprise.html.twig',['vueFormulaireEntreprise' => $formulaireEntreprise->createView(), 'action'=>"modifier"]);
+    }
+
 
      /**
      * @Route("/formations", name="pro_stage_formations")

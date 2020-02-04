@@ -25,7 +25,7 @@
            
            <tr>
         
-             <td> {{entrepriseCourante.nom}} </td>            
+             <td> {{entrepriseCourante.nom}} <a href = "{{ path('pro_stage_modifEntreprise',{'id': entrepriseCourante.id}) }}"> (Modifier cette entreprise)</a> </td>            
              <td> <a href = "{{ path('pro_stage_entreprise_id', {'nomEntreprise': entrepriseCourante.nom}) }}"> Liste des stages</a></td>
            </tr>
 
