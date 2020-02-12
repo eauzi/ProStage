@@ -61,7 +61,7 @@ class ProStageController extends AbstractController
 
         $formulaireEntreprise->handleRequest($request);
 
-        if ($formulaireEntreprise->isSubmitted())
+        if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
         {        
            // Enregistrer la ressource en base de données
            $manager->persist($entreprise);
@@ -93,10 +93,10 @@ class ProStageController extends AbstractController
 
         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu
         dans cette requête contient des variables titre, descriptif, etc. alors la méthode handleRequest()
-        récupère les valeurs de ces variables et les affecte à l'objet $ressource*/
+        récupère les valeurs de ces variables et les affecte à l'objet $entreprise */
         $formulaireEntreprise->handleRequest($request);
 
-         if ($formulaireEntreprise->isSubmitted() )
+         if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
          {
             // Enregistrer la ressource en base de donnéelse
             $manager->persist($entreprise);

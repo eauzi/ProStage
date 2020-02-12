@@ -4,19 +4,32 @@
 
  {% block contenu %}
  
- {% if action == "ajout" %}
+ {% if action == "ajouter" %}
  <h2> Ajout d'une entreprise </h2>
 
  {% else %}
  <h2> Modifier une entreprise </h2>
  {% endif %}
 
-{{form_start(vueFormulaireEntreprise)}}
+{{form_start(vueFormulaireEntreprise, {'attr' : {'novalidate' : 'novalidate'}})}}
 
-{{ form_row(vueFormulaireEntreprise.Nom)}}
-{{ form_row(vueFormulaireEntreprise.Activite)}}
-{{ form_row(vueFormulaireEntreprise.Adresse)}}
-{{ form_row(vueFormulaireEntreprise.SiteWeb)}}
-<button type="submit" class="btn btn-dark">Valider</button>
+{{ form_label(vueFormulaireEntreprise.Nom)}}
+{{ form_widget(vueFormulaireEntreprise.Nom)}}
+{{ form_errors(vueFormulaireEntreprise.Nom)}}
+
+{{ form_label(vueFormulaireEntreprise.Activite)}}
+{{ form_widget(vueFormulaireEntreprise.Activite)}}
+{{ form_errors(vueFormulaireEntreprise.Nom)}}
+
+{{ form_label(vueFormulaireEntreprise.Adresse)}}
+{{ form_widget(vueFormulaireEntreprise.Adresse)}}
+{{ form_errors(vueFormulaireEntreprise.Nom)}}
+
+
+{{ form_label(vueFormulaireEntreprise.SiteWeb)}}
+{{ form_widget(vueFormulaireEntreprise.SiteWeb)}}
+{{ form_errors(vueFormulaireEntreprise.Nom)}}
+
+<br><button type="submit" class="btn btn-dark">Valider</button>
 {{form_end(vueFormulaireEntreprise)}}
 {% endblock %}
