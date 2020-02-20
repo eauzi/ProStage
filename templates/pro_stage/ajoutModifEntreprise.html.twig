@@ -11,8 +11,6 @@
  <h2> Modifier une entreprise </h2>
  {% endif %}
 
-
-
 {{form_start(vueFormulaireEntreprise, {'attr' : {'novalidate' : 'novalidate'}})}}
 
 {{ form_label(vueFormulaireEntreprise.nom)}}
@@ -28,8 +26,8 @@
 {{ form_errors(vueFormulaireEntreprise.adresse)}}
 
 
-{{ form_label(vueFormulaireEntreprise.siteweb)}}
-{{ form_widget(vueFormulaireEntreprise.siteweb)}}
+{{ form_label(vueFormulaireEntreprise.siteWeb)}}
+{{ form_widget(vueFormulaireEntreprise.siteWeb)}}
 
 
 <br><button type="submit" class="btn btn-dark">Valider</button>

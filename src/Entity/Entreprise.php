@@ -30,7 +30,7 @@ class Entreprise
      * @ORM\Column(type="string", length=140)
      * @Assert\NotBlank(message = "L'activité doit être renseignée")
      */
-    private $activité;
+    private $activite;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -75,12 +75,12 @@ class Entreprise
 
     public function getActivite(): ?string
     {
-        return $this->activité;
+        return $this->activite;
     }
 
-    public function setActivite(string $activité): self
+    public function setActivite(string $activite): self
     {
-        $this->activité = $activité;
+        $this->activite = $activite;
 
         return $this;
     }

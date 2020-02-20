@@ -51,14 +51,9 @@ class ProStageController extends AbstractController
         // Création d'une entrprise vierge
         $entreprise=new Entreprise();
 
-        // Création de l'objet formulaire
-        $formulaireEntreprise=$this->createFormBuilder($entreprise)
-        ->add('nom')
-        ->add('activite')
-        ->add('adresse')
-        ->add('siteweb')
-        ->getForm();
-
+        // Création de l'objet formulaire à partir du formulaire externalisé
+        $formulaireEntreprise=$this->createForm(EntrepriseType::class,$entreprise);
+        
         $formulaireEntreprise->handleRequest($request);
 
         if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
