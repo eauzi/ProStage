@@ -79,12 +79,7 @@ class ProStageController extends AbstractController
     public function modifierEntreprise(Request $request, ObjectManager $manager, Entreprise $entreprise)
     {
         // Création du formulaire permettant de modifier une ressource
-        $formulaireEntreprise = $this->createFormBuilder($entreprise)
-        ->add('Nom')
-        ->add('Activite')
-        ->add('Adresse')
-        ->add('SiteWeb')
-        ->getForm();
+        $formulaireEntreprise = $this->createForm(EntrepriseType::class,$entreprise);
 
         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu
         dans cette requête contient des variables titre, descriptif, etc. alors la méthode handleRequest()
