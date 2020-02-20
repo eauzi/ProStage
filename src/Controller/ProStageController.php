@@ -53,10 +53,10 @@ class ProStageController extends AbstractController
 
         // Création de l'objet formulaire
         $formulaireEntreprise=$this->createFormBuilder($entreprise)
-        ->add('Nom')
-        ->add('Activite')
-        ->add('Adresse')
-        ->add('SiteWeb')
+        ->add('nom')
+        ->add('activite')
+        ->add('adresse')
+        ->add('siteweb')
         ->getForm();
 
         $formulaireEntreprise->handleRequest($request);
