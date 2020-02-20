@@ -34,12 +34,12 @@ class Stage
     private $emailContact;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", inversedBy="stages")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", inversedBy="stages", cascade={"persist"})
      */
     private $formation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise", inversedBy="stages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise", inversedBy="stages", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $entreprise;

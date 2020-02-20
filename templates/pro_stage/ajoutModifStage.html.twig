@@ -1,0 +1,24 @@
+ {% extends 'monTemplate.html.twig' %}
+
+ {% block title %} Prostage - Ajouter un stage {% endblock %}
+
+ {% block contenu %}
+ 
+ {% if action == "ajouter" %}
+ <h2> Ajout d'un stage </h2>
+
+ {% else %}
+ <h2> Modifier un stage </h2>
+ {% endif %}
+
+{{form_start(vueFormulaireStage, {'attr' : {'novalidate' : 'novalidate'}})}}
+
+{{form_row(vueFormulaireStage.titre)}}
+{{form_row(vueFormulaireStage.description)}}
+{{form_row(vueFormulaireStage.emailContact)}}
+{{form_row(vueFormulaireStage.entreprise)}}
+{{form_row(vueFormulaireStage.formation)}}
+
+<br><button type="submit" class="btn btn-dark">Valider</button>
+{{form_end(vueFormulaireStage)}}
+{% endblock %}

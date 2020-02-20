@@ -11,6 +11,8 @@ use App\Repository\StageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Form\EntrepriseType;
+use App\Form\StageType;
+use App\Form\EntityType;
 
 class ProStageController extends AbstractController
 {
@@ -25,7 +27,34 @@ class ProStageController extends AbstractController
             'controller_name' => 'ProStageController', "stages"=> $stages,
         ]);
     }
-	
+    
+    /**
+     * @Route("/stages/ajouter", name="pro_stage_ajout_stage")
+     */
+    public function ajouterStage(StageRepository $repositoryStage, ObjectManager $manager, Request $request)
+    {
+        // Création d'un stage vierge
+        $stage=new Stage();
+
+        // Création de l'objet formulaire à partir du formulaire externalisé
+        $formulaireStage=$this->createForm(StageType::class,$stage);
+        
+        $formulaireStage->handleRequest($request);
+
+        if ($formulaireStage->isSubmitted() && $formulaireStage->isValid())
+        {        
+           // Enregistrer la ressource en base de données
+           $manager->persist($stage);
+           $manager->flush();
+
+           // Rediriger l'utilisateur vers la page d'accueil
+           return $this->redirectToRoute('pro_stage');
+        }
+        
+       
+        return $this->render('pro_stage/ajoutModifStage.html.twig', ['vueFormulaireStage' => $formulaireStage->createView(), 'action'=>"ajouter"
+        ]);
+    }
 	
 	 /**
      * @Route("/entreprises", name="pro_stage_entreprise")
