@@ -20,7 +20,7 @@ class Entreprise
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message = "Le nom doit être renseigné")
      * @Assert\Length(min=4, minMessage = "Le nom doit faire au minimum {{ limit }} caractères")
      */
@@ -33,7 +33,7 @@ class Entreprise
     private $activite;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=200)
      * @Assert\Regex(pattern="# (([0-8][0-9])|(9[0-5]))[0-9]{3} #", message="Il semble y avoir un problème avec le code postal")
      * @Assert\Regex(pattern="#rue|avenue|boulevard|impasse|allée|place|route|voie#", message="Le type de route/voie semble incorrect")
      * @Assert\Regex(pattern="#^[1-9]([0-9])?([0-9])?(bis | bis)? #", message="Le numéro de rue semble incorrect")

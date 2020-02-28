@@ -19,7 +19,7 @@ class Formation
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=255)
      */
     private $nomLong;
 

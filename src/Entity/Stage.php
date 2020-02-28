@@ -29,7 +29,7 @@ class Stage
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $emailContact;
 

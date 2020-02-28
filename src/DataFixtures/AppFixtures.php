@@ -7,13 +7,40 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Entreprise;
 use App\Entity\Formation;
 use App\Entity\Stage;
+use App\Entity\User;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+        {
+            $this->passwordEncoder = $passwordEncoder;
+        }
+
     public function load(ObjectManager $manager)
     {
+
         // Création d'un générateur de données faker
         $faker = \Faker\Factory::create('fr_FR'); 
+
+        // Création de 2 utilisateurs
+        $emma= new User();
+        $emma->setEmail("auzi.emma@gmail.com");
+        $emma->setRoles(["ROLE_ADMIN"]);
+        $plainPassword="emma";
+        $emma->setPassword($this->passwordEncoder->encodePassword($emma,$plainPassword));
+        
+        $arthur= new User();
+        $arthur->setEmail("arthur.murillo@gmail.com");
+        $plainPassword2="arthur";
+        $arthur->setRoles(["ROLE_USER"]);
+        $arthur->setPassword($this->passwordEncoder->encodePassword($arthur,$plainPassword2));
+        
+        $manager->persist($emma);
+        $manager->persist($arthur);
+ 
 
         // Création d'entreprises
         
@@ -24,7 +51,7 @@ class AppFixtures extends Fixture
             $nomEntr=$faker->company;
             $entreprise = new Entreprise();
             $entreprise->setNom($nomEntr);
-            $entreprise->setActivité($faker->realText($maxNbChars = 20, $indexSize = 2));
+            $entreprise->setActivite($faker->realText($maxNbChars = 20, $indexSize = 2));
             $entreprise->setAdresse($faker->streetAddress);
             $entreprise->setSiteWeb("www.$nomEntr.com");
 
@@ -40,15 +67,15 @@ class AppFixtures extends Fixture
         // Création des formations
         
         $DUTInfo = new Formation();
-        $DUTInfo->setNomLong("Diplôme Universitaire Technologique Informatique");
+        $DUTInfo->setNomLong("Diplôme Univ Techno Info");
         $DUTInfo->setNomCourt("DUT Info");
 
         $LicenceP = new Formation();
-        $LicenceP->setNomLong("Licence Professionnelle Multimédia");
+        $LicenceP->setNomLong("Licence Pro Multimédia");
         $LicenceP->setNomCourt("LP Multimédia");
 
         $DUTic = new Formation();
-        $DUTic->setNomLong("Diplôme Universitaire en Technologie de l'Information et de la Communication");
+        $DUTic->setNomLong("Diplôme de l'Info et de la Com");
         $DUTic->setNomCourt("DU TIC");
 
         // On regroupe les objets "Formation" dans un tableau
@@ -69,7 +96,7 @@ class AppFixtures extends Fixture
 
               
                 // Sélectionner une Entreprise au hasard 
-                $numEntreprise = $faker->numberBetween($min = 0, $max = 30);
+                $numEntreprise = $faker->numberBetween($min = 1, $max = 30);
                 // Création relation Stage --> Entreprise
                 $stage->setEntreprise($tableauEntreprises[$numEntreprise]);
                 // Création relation Entreprise --> Stage
