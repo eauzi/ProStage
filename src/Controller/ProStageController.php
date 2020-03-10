@@ -175,7 +175,7 @@ class ProStageController extends AbstractController
     }
 
     /**
-     * @Route("/formations/{nomFormation}", name="pro_stage_formation_id")
+     * @Route("menu/formations/{nomFormation}", name="pro_stage_formation_id")
      */
 
     public function listeStagesParFormation(StageRepository $repositoryStage, $nomFormation)
