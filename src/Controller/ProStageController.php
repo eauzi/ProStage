@@ -131,7 +131,7 @@ class ProStageController extends AbstractController
 
 
      /**
-     * @Route("/formations", name="pro_stage_formations")
+     * @Route("menu/formations/", name="pro_stage_formations")
      */
     public function afficheFormation()
     {
