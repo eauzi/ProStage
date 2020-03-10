@@ -31,7 +31,10 @@
       <td> {{stage.entreprise.activite}} </td>
       <td> {{stage.entreprise.adresse}} </td>
       <td> {{stage.description}} </td>
-      <td></td>
+      <td> {% for formation in stage.formation%}
+           {{ formation.nomCourt }}
+           {% endfor %}
+      </td>
       <td> {{stage.emailContact}}</td>
     
     </tr>
