@@ -1,0 +1,35 @@
+{% extends 'monTemplate.html.twig' %}
+
+{% block contenu %}
+<h1>Formation</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ formation.id }}</td>
+        </tr>
+        <tr>
+            <th>NomLong</th>
+            <td>{{ formation.nomLong }}</td>
+        </tr>
+        <tr>
+            <th>NomCourt</th>
+            <td>{{ formation.nomCourt }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="{{ path('formation_index') }}"> Retour à la liste</a>
+|
+<a href="{{ path('formation_edit', {'id': formation.id}) }}">Modifier</a>
+
+<form method="post" action="{{ path('formation_delete', {'id': formation.id}) }}"
+    onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="SUPPRIMER">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ formation.id) }}">
+    <button class="btn">Supprimer</button>
+</form>
+
+
+{% endblock %}
