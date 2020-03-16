@@ -32,6 +32,7 @@ security:
           - { path: ^/entreprises/ajouter, roles: ROLE_ADMIN }
           - { path: ^/stages/ajouter, roles: [ROLE_ADMIN, ROLE_USER] }
           - { path: ^/formation, roles: ROLE_ADMIN }
+          - { path: ^/admin, roles: ROLE_ADMIN }
     
     encoders:
         # use your user class name here
