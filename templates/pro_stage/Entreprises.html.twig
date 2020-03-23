@@ -1,36 +1,46 @@
- 
- {% extends 'monTemplate.html.twig' %}
+{% extends 'monTemplate.html.twig' %}
 
 
 {% block title %}Prostage - Entreprises{% endblock %}
 
 {% block contenu %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+  .example-wrapper {
+    margin: 1em auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+  }
+
+  .example-wrapper code {
+    background: #F5F5F5;
+    padding: 2px 6px;
+  }
 </style>
 <div class="example-wrapper">
- <h2>Liste des entreprises proposant un stage</h2>
- </div>
+  <h2>Liste des entreprises proposant un stage</h2>
+</div>
 
- <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Entreprise</th>
-         <th scope="col">Détails</th>
-        </thead>
-        <tbody>
-           
-           {% for entrepriseCourante in entreprises %}
-           
-           <tr>
-        
-             <td> {{entrepriseCourante.nom}} <a href = "{{ path('pro_stage_modifEntreprise',{'id': entrepriseCourante.id}) }}"> (Modifier cette entreprise)</a> </td>            
-             <td> <a href = "{{ path('pro_stage_entreprise_id', {'nomEntreprise': entrepriseCourante.nom}) }}"> Liste des stages</a></td>
-           </tr>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Entreprise</th>
+      <th scope="col">Détails</th>
+  </thead>
+  <tbody>
 
-           {% endfor %}
-           </tbody>
-      </table>
+    {% for entrepriseCourante in entreprises %}
+
+    <tr>
+
+      <td> {{entrepriseCourante.nom}} <a href="{{ path('pro_stage_modifEntreprise',{'id': entrepriseCourante.id}) }}">
+          (Modifier cette entreprise)</a> </td>
+      <td> <a href="{{ path('pro_stage_entreprise_id', {'nomEntreprise': entrepriseCourante.nom}) }}"> Liste des
+          stages</a></td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}

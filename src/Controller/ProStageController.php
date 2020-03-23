@@ -43,7 +43,7 @@ class ProStageController extends AbstractController
 
         if ($formulaireStage->isSubmitted() && $formulaireStage->isValid())
         {        
-           // Enregistrer la ressource en base de données
+           // Enregistrer le stage en base de données
            $manager->persist($stage);
            $manager->flush();
 
@@ -64,8 +64,6 @@ class ProStageController extends AbstractController
         
         $repositoryEntreprise=$this->getDoctrine()->getRepository(Entreprise::class);
         $entreprises=$repositoryEntreprise->findAll();
-
-        
        
         return $this->render('pro_stage/Entreprises.html.twig', [
             'controller_name' => 'ProStageController', "entreprises" => $entreprises,
@@ -77,7 +75,7 @@ class ProStageController extends AbstractController
      */
     public function ajouterEntreprise(Request $request, ObjectManager $manager)
     {
-        // Création d'une entrprise vierge
+        // Création d'une entreprise vierge
         $entreprise=new Entreprise();
 
         // Création de l'objet formulaire à partir du formulaire externalisé
@@ -87,7 +85,7 @@ class ProStageController extends AbstractController
 
         if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
         {        
-           // Enregistrer la ressource en base de données
+           // Enregistrer l'entreprise en base de données
            $manager->persist($entreprise);
            $manager->flush();
 
@@ -107,7 +105,7 @@ class ProStageController extends AbstractController
      */
     public function modifierEntreprise(Request $request, ObjectManager $manager, Entreprise $entreprise)
     {
-        // Création du formulaire permettant de modifier une ressource
+        // Création du formulaire permettant de modifier une entreprise
         $formulaireEntreprise = $this->createForm(EntrepriseType::class,$entreprise);
 
         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu
@@ -117,7 +115,7 @@ class ProStageController extends AbstractController
 
          if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
          {
-            // Enregistrer la ressource en base de donnéelse
+            // Enregistrer l'entreprise en base de donnéelse
             $manager->persist($entreprise);
             $manager->flush();
 
